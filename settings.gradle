@@ -1,0 +1,1 @@
+include ':app', ':go-core', ':go-compiler', ':go-annotation'
