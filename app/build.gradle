@@ -27,6 +27,6 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:support-v4:23.2.0'
 
-    provided 'com.github.qbaowei.Go:go-compiler:1.0.1'
-    compile 'com.github.qbaowei.Go:go-core:1.0.1'
+    provided 'com.github.qbaowei.Go:go-compiler:1.0.2'
+    compile 'com.github.qbaowei.Go:go-core:1.0.2'
 }
