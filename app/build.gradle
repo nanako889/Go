@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
+//apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion 23
@@ -27,6 +27,9 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:support-v4:23.2.0'
-    apt project(':go-compiler')
-    compile project(':go-core')
+    //provided project(':go-compiler')
+    //compile project(':go-core')
+
+    provided 'com.github.qbaowei.Go:go-compiler:1.0.0'
+    compile 'com.github.qbaowei.Go:go-core:1.0.0'
 }
