@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 
 import com.qbw.annotation.Go;
-import com.qbw.annotation.go.IntentValue;
+import com.qbw.annotation.go.BundleValue;
 import com.qbw.log.XLog;
 
 import java.io.Serializable;
@@ -36,58 +36,58 @@ public class TestGoActivity extends Activity {
      */
 
 
-    @IntentValue
+    @BundleValue
     byte mTb;
-    @IntentValue
+    @BundleValue
     Byte tb1;
-    @IntentValue
+    @BundleValue
     char mTc;
-    @IntentValue
+    @BundleValue
     Character mTc1;
-    @IntentValue
+    @BundleValue
     short mTs;
-    @IntentValue
+    @BundleValue
     Short mTs1;
-    @IntentValue
+    @BundleValue
     int mTi;
-    @IntentValue
+    @BundleValue
     Integer mTi1;
-    @IntentValue
+    @BundleValue
     long mTl;
-    @IntentValue
+    @BundleValue
     Long tl1;
-    @IntentValue
+    @BundleValue
     float mTf;
-    @IntentValue
+    @BundleValue
     Float mTf1;
-    @IntentValue
+    @BundleValue
     double mTd;
-    @IntentValue
+    @BundleValue
     Double mTd1;
-    @IntentValue
+    @BundleValue
     String mTstr;
-    @IntentValue
+    @BundleValue
     boolean mTbn;
-    @IntentValue
+    @BundleValue
     Boolean mTbn1;
 
-    @IntentValue
+    @BundleValue
     String[] mTsarr;
-    @IntentValue
+    @BundleValue
     int[] mTiarr;
-    @IntentValue
+    @BundleValue
     long[] mTlarr;
-    @IntentValue
+    @BundleValue
     float[] mTfarr;
-    @IntentValue
+    @BundleValue
     double[] mTdarr;
 
 
-    @IntentValue
+    @BundleValue
     Serializable mTsl;
-    @IntentValue
+    @BundleValue
     Parcelable mTpl;
-    @IntentValue
+    @BundleValue
     Parcelable[] mTplarr;
 
     private ObservableField<String> mInfo = new ObservableField<>();

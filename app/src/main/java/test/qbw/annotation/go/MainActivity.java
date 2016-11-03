@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
 import com.qbw.annotation.Go;
-import com.qbw.annotation.go.IntentValue;
+import com.qbw.annotation.go.BundleValue;
 import com.qbw.log.XLog;
 
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ import test.qbw.annotation.go.databinding.ActivityMainBinding;
 
 public class MainActivity extends FragmentActivity {
 
-    @IntentValue
+    @BundleValue
     long id;
 
     @Override
@@ -59,7 +59,7 @@ public class MainActivity extends FragmentActivity {
 
     public static class TestFragment extends Fragment {
 
-        @IntentValue
+        @BundleValue
         Long id;
 
         @Override

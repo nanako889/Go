@@ -1,6 +1,7 @@
 package test.qbw.annotation.go.test;
 
-import com.qbw.annotation.go.IntentValue;
+
+import com.qbw.annotation.go.BundleValue;
 
 /**
  * Created by Bond on 2016/11/03 15:32
@@ -9,11 +10,11 @@ import com.qbw.annotation.go.IntentValue;
 
 
 public class TestGoActivity1 {
-    @IntentValue
+    @BundleValue
     long id;
 
     public static class TestGoActivity {
-        @IntentValue
+        @BundleValue
         String name;
     }
 }

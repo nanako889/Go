@@ -2,7 +2,7 @@ package com.qbw.annotation.go.compiler;
 
 import com.google.auto.service.AutoService;
 import com.qbw.annotation.go.Constant;
-import com.qbw.annotation.go.IntentValue;
+import com.qbw.annotation.go.BundleValue;
 import com.qbw.annotation.go.compiler.common.Log;
 import com.qbw.annotation.go.compiler.common.VariableEnity;
 
@@ -25,7 +25,7 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.Elements;
 
-@SupportedAnnotationTypes("com.qbw.annotation.go.IntentValue")
+@SupportedAnnotationTypes("com.qbw.annotation.go.BundleValue")
 @SupportedSourceVersion(SourceVersion.RELEASE_7)
 @AutoService(Processor.class)
 public class GoProcessor extends AbstractProcessor {
@@ -49,7 +49,7 @@ public class GoProcessor extends AbstractProcessor {
 
         Map<String, ParasitePoet> poetMap = new LinkedHashMap<>();
 
-        for (Element element : roundEnv.getElementsAnnotatedWith(IntentValue.class)) {
+        for (Element element : roundEnv.getElementsAnnotatedWith(BundleValue.class)) {
 
             String variableName = element.toString();
             TypeMirror variableType = element.asType();
@@ -97,7 +97,7 @@ public class GoProcessor extends AbstractProcessor {
                     String iname = poets[i].getComplexClassName();
                     String jname = poets[j].getComplexClassName();
                     if (iname.equals(jname)) {
-                        Log.e(String.format("[Go]\n*****\nIntentValue is not allowed to be used in classes whichs classname is equal, such as [%s.%s, %s.%s]\n*****", poets[i].getPackageName(), iname, poets[j].getPackageName(), jname));
+                        Log.e(String.format("[Go]\n*****\nBundleValue is not allowed to be used in classes whichs classname is equal, such as [%s.%s, %s.%s]\n*****", poets[i].getPackageName(), iname, poets[j].getPackageName(), jname));
                         return false;
                     }
                 }
