@@ -28,7 +28,7 @@ public class VariableEnity {
         mType = mTypeMirror.toString();
         mSourceType = mType;
         convertType();
-        Log.i(String.format("name[%s] type[%s]", mName, mType));
+        //Log.i(String.format("name[%s] type[%s]", mName, mType));
     }
 
     /**

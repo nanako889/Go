@@ -54,10 +54,10 @@ public class GoProcessor extends AbstractProcessor {
             String variableName = element.toString();
             TypeMirror variableType = element.asType();
 
-//            if (!isVariableTypeSupported(variableType.toString())) {
-//                Log.e("Not support " + variableType.toString());
-//                return false;
-//            }
+            //            if (!isVariableTypeSupported(variableType.toString())) {
+            //                Log.e("Not support " + variableType.toString());
+            //                return false;
+            //            }
 
             if (ElementKind.FIELD != element.getKind()) {
                 Log.e(variableName + " should be a field variable");
@@ -89,6 +89,20 @@ public class GoProcessor extends AbstractProcessor {
 
         if (!poetMap.isEmpty()) {
 
+            ParasitePoet[] poets;
+            poetMap.values().toArray(poets = new ParasitePoet[poetMap.values().size()]);
+            int ppCount = poets.length;
+            for (int i = 0; i < ppCount - 1; i++) {
+                for (int j = i + 1; j < ppCount; j++) {
+                    String iname = poets[i].getComplexClassName();
+                    String jname = poets[j].getComplexClassName();
+                    if (iname.equals(jname)) {
+                        Log.e(String.format("[Go]\n*****\nIntentValue is not allowed to be used in classes whichs classname is equal, such as [%s.%s, %s.%s]\n*****", poets[i].getPackageName(), iname, poets[j].getPackageName(), jname));
+                        return false;
+                    }
+                }
+            }
+
             new GoPoet(mFiler, poetMap).generate();
 
             for (Map.Entry<String, ParasitePoet> parasite : poetMap.entrySet()) {
@@ -99,40 +113,40 @@ public class GoProcessor extends AbstractProcessor {
         return true;
     }
 
-//    protected Set<String> getNotSupportedVariableTypes() {
-//        Set<String> vts = new HashSet<>();
-//
-//        vts.add(Map.class.getCanonicalName());
-//        vts.add(HashMap.class.getCanonicalName());
-//        vts.add(Hashtable.class.getCanonicalName());
-//        vts.add(WeakHashMap.class.getCanonicalName());
-//        vts.add(LinkedHashMap.class.getCanonicalName());
-//        vts.add(TreeMap.class.getCanonicalName());
-//        vts.add(IdentityHashMap.class.getCanonicalName());
-//
-//        vts.add(Set.class.getCanonicalName());
-//        vts.add(HashSet.class.getCanonicalName());
-//        vts.add(LinkedHashSet.class.getCanonicalName());
-//        vts.add(TreeSet.class.getCanonicalName());
-//
-//        vts.add(List.class.getCanonicalName());
-//        vts.add(Vector.class.getCanonicalName());
-//        vts.add(ArrayList.class.getCanonicalName());
-//        vts.add(LinkedList.class.getCanonicalName());
-//
-//        //vts.add(String[].class.getCanonicalName());
-//
-//        return vts;
-//    }
-//
-//    private boolean isVariableTypeSupported(String canonicalName) {
-//        boolean ret = true;
-//        for (String s : mNotSupportedVariableType) {
-//            if (canonicalName.startsWith(s)) {
-//                ret = false;
-//                break;
-//            }
-//        }
-//        return ret;
-//    }
+    //    protected Set<String> getNotSupportedVariableTypes() {
+    //        Set<String> vts = new HashSet<>();
+    //
+    //        vts.add(Map.class.getCanonicalName());
+    //        vts.add(HashMap.class.getCanonicalName());
+    //        vts.add(Hashtable.class.getCanonicalName());
+    //        vts.add(WeakHashMap.class.getCanonicalName());
+    //        vts.add(LinkedHashMap.class.getCanonicalName());
+    //        vts.add(TreeMap.class.getCanonicalName());
+    //        vts.add(IdentityHashMap.class.getCanonicalName());
+    //
+    //        vts.add(Set.class.getCanonicalName());
+    //        vts.add(HashSet.class.getCanonicalName());
+    //        vts.add(LinkedHashSet.class.getCanonicalName());
+    //        vts.add(TreeSet.class.getCanonicalName());
+    //
+    //        vts.add(List.class.getCanonicalName());
+    //        vts.add(Vector.class.getCanonicalName());
+    //        vts.add(ArrayList.class.getCanonicalName());
+    //        vts.add(LinkedList.class.getCanonicalName());
+    //
+    //        //vts.add(String[].class.getCanonicalName());
+    //
+    //        return vts;
+    //    }
+    //
+    //    private boolean isVariableTypeSupported(String canonicalName) {
+    //        boolean ret = true;
+    //        for (String s : mNotSupportedVariableType) {
+    //            if (canonicalName.startsWith(s)) {
+    //                ret = false;
+    //                break;
+    //            }
+    //        }
+    //        return ret;
+    //    }
 }

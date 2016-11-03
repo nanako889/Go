@@ -32,6 +32,7 @@ public class TestGoActivity extends Activity {
      * 3.没有列出来的类型不支持
      * 4.有时候需要build一下才会生成对应文件
      * 5.会自动生成与Activity名字对应的文件名
+     * 6.不要在类名相同的类中使用，这样Go.java里面会生成函数名一样的函数
      */
 
 

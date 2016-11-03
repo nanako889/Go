@@ -29,6 +29,6 @@
         }
     }
 
-provided 'com.github.qbaowei.Go:go-compiler:1.0.0'
+provided 'com.github.qbaowei.Go:go-compiler:1.0.1'
 
-compile 'com.github.qbaowei.Go:go-core:1.0.0'
+compile 'com.github.qbaowei.Go:go-core:1.0.1'

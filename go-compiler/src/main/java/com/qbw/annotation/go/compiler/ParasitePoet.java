@@ -44,12 +44,24 @@ public class ParasitePoet extends AbstractPoet {
 
     private ClassName mHostClassName;
 
+    private String mPackageName;
+    private String mComplexClassName;
+
     public ParasitePoet(Filer filer, String packageName, String parasiteComplexClassName, String parasiteSimpleClassName, String hostComplexClassName) {
         super(filer, packageName, parasiteComplexClassName, parasiteSimpleClassName);
+        mPackageName = packageName;
         mVariableNames = new ArrayList<>();
+        mComplexClassName = hostComplexClassName;
         mHostClassName = ClassName.get(packageName, hostComplexClassName);
     }
 
+    public String getPackageName() {
+        return mPackageName;
+    }
+
+    public String getComplexClassName() {
+        return mComplexClassName;
+    }
 
     @Override
     protected List<FieldSpec> getFields() {
