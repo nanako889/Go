@@ -9,7 +9,7 @@
 
 
     class T {
-        @IntentValue
+        @BundleValue
         long id;
     }
 

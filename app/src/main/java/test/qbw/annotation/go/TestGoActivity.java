@@ -26,7 +26,7 @@ import test.qbw.annotation.go.databinding.ActivityTestBinding;
 public class TestGoActivity extends Activity {
 
     /**
-     * IntentValue限制条件如下
+     * BundleValue限制条件如下
      * 1.修饰符不能是‘Private’
      * 2.如果变量是’mX‘类型，生成函数的时候会去掉’m‘并将第一个字符改为小写，比如‘mByte’->‘byte’,然而byte是关键字不能使用，所以你写变量的时候要注意一下
      * 3.没有列出来的类型不支持
