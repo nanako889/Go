@@ -1,6 +1,7 @@
 package com.qbw.annotation.go.core;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -14,15 +15,10 @@ import com.qbw.log.XLog;
 
 public abstract class AbstractGo implements IGo {
 
-    protected Activity mFromAct;
+    protected Context mFromAct;
     protected Class mGoToCls;
 
     protected Bundle mBundle;
-
-//    public AbstractGo from(Activity fromAct) {
-//        mFromAct = fromAct;
-//        return this;
-//    }
 
     @Override
     public void go() {
@@ -35,6 +31,9 @@ public abstract class AbstractGo implements IGo {
             return;
         }
         Intent intent = new Intent(mFromAct, mGoToCls);
+        if (!(mFromAct instanceof Activity)) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
         if (null != mBundle) {
             intent.putExtras(mBundle);
         }
@@ -44,12 +43,4 @@ public abstract class AbstractGo implements IGo {
     public Bundle extract() {
         return mBundle;
     }
-
-//    protected Bundle emptyBundle() {
-//        if (null == mBundle) {
-//            mBundle = new Bundle();
-//        }
-//        mBundle.clear();
-//        return mBundle;
-//    }
 }

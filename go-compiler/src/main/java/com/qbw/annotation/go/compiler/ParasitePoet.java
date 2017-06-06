@@ -88,7 +88,7 @@ public class ParasitePoet extends AbstractPoet {
         //from函数
         mb = MethodSpec.methodBuilder(M_FROM);
         mb.addModifiers(Modifier.PUBLIC);
-        mb.addParameter(ParameterSpec.builder(ClassNames.ACTIVITY, P_FROM_ACT).build());
+        mb.addParameter(ParameterSpec.builder(ClassNames.CONTEXT, P_FROM_ACT).build());
         mb.returns(mTargetClassName);
         mb.addStatement("$L = $L", F_FROM, P_FROM_ACT);
         mb.addStatement("$L = new $T()", F_BUNDLE, BUNDLE);
