@@ -8,4 +8,5 @@ package com.qbw.annotation.go.core;
 
 public interface IGo {
     void go();
+    void goForResult(int requestCode);
 }

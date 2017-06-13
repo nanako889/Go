@@ -40,6 +40,27 @@ public abstract class AbstractGo implements IGo {
         mFromAct.startActivity(intent);
     }
 
+    @Override
+    public void goForResult(int requestCode) {
+        if (null == mFromAct) {
+            XLog.e("method 'from' is not be called!");
+            return;
+        }
+        if (null == mGoToCls) {
+            XLog.e("method 'to' is not be called");
+            return;
+        }
+        if (!(mFromAct instanceof Activity)) {
+            XLog.e("goForResult, from must be a activity!");
+            return;
+        }
+        Intent intent = new Intent(mFromAct, mGoToCls);
+        if (null != mBundle) {
+            intent.putExtras(mBundle);
+        }
+        ((Activity) mFromAct).startActivityForResult(intent, requestCode);
+    }
+
     public Bundle extract() {
         return mBundle;
     }

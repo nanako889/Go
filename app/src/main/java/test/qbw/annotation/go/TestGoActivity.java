@@ -146,4 +146,10 @@ public class TestGoActivity extends Activity {
         stringBuilder.append(String.format("mTplarr=%s", sb.toString()));
         return stringBuilder.toString();
     }
+
+    @Override
+    public void onBackPressed() {
+        setResult(100);
+        super.onBackPressed();
+    }
 }

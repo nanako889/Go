@@ -1,5 +1,6 @@
 package test.qbw.annotation.go;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -109,7 +110,13 @@ public class MainActivity extends FragmentActivity {
                     .tsl(new ModelS())
                     .tpl(new ModelP())
                     .tplarr(new Parcelable[]{new ModelP(), new ModelP(), new ModelP()})
-                    .go();
+                    .goForResult(9);
         }
     };
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        XLog.d("here-----------requestCode=%d, resultCode=%d", requestCode, resultCode);
+    }
 }
