@@ -1,8 +1,10 @@
 package com.qbw.annotation.go.core;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.qbw.log.XLog;
@@ -41,7 +43,13 @@ public abstract class AbstractGo implements IGo {
     }
 
     @Override
-    public void goForResult(int requestCode) {
+    public void go(int requestCode) {
+        go(requestCode, null);
+    }
+
+
+    @Override
+    public void go(Bundle bundle) {
         if (null == mFromAct) {
             XLog.e("method 'from' is not be called!");
             return;
@@ -58,7 +66,40 @@ public abstract class AbstractGo implements IGo {
         if (null != mBundle) {
             intent.putExtras(mBundle);
         }
-        ((Activity) mFromAct).startActivityForResult(intent, requestCode);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            mFromAct.startActivity(intent, bundle);
+        } else {
+            XLog.e("go(Bundle bundle) need sdk >= 16");
+        }
+    }
+
+    @Override
+    public void go(int requestCode, Bundle bundle) {
+        if (null == mFromAct) {
+            XLog.e("method 'from' is not be called!");
+            return;
+        }
+        if (null == mGoToCls) {
+            XLog.e("method 'to' is not be called");
+            return;
+        }
+        if (!(mFromAct instanceof Activity)) {
+            XLog.e("goForResult, from must be a activity!");
+            return;
+        }
+        Intent intent = new Intent(mFromAct, mGoToCls);
+        if (null != mBundle) {
+            intent.putExtras(mBundle);
+        }
+        if (bundle == null) {
+            ((Activity) mFromAct).startActivityForResult(intent, requestCode);
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                ((Activity) mFromAct).startActivityForResult(intent, requestCode, bundle);
+            } else {
+                XLog.e("public void go(int requestCode, Bundle bundle) {\n need sdk >= 16");
+            }
+        }
     }
 
     public Bundle extract() {

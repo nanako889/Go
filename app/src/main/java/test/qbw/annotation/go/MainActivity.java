@@ -1,12 +1,18 @@
 package test.qbw.annotation.go;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.transition.Fade;
+import android.transition.Slide;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 
 import com.qbw.annotation.Go;
 import com.qbw.annotation.go.BundleValue;
@@ -24,6 +30,14 @@ public class MainActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
+            getWindow().setAllowEnterTransitionOverlap(false);
+            getWindow().setAllowReturnTransitionOverlap(false);
+            /*Fade fade = new Fade();
+            fade.setDuration(5000);
+            getWindow().setSharedElementExitTransition(fade);*/
+        }
         super.onCreate(savedInstanceState);
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setAct(this);
@@ -85,32 +99,46 @@ public class MainActivity extends FragmentActivity {
     public View.OnClickListener test1GoClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Go.TestGoActivity().from(MainActivity.this)
-                    .tb((byte) 1).tb1((byte) 2)
-                    .tc('q')
-                    .tc1('b')
-                    .ts((short) 3)
-                    .ts1((short) 4)
-                    .ti(5)
-                    .ti1(6)
-                    .tl(7)
-                    .tl1(8l)
-                    .tf(0.1f)
-                    .tf1(0.2f)
-                    .td(0.3)
-                    .td1(0.4)
-                    .tstr("haha")
-                    .tbn(true)
-                    .tbn1(false)
-                    .tsarr(new String[]{"hello,", "a", "n", "d", "r", "o", "i", "d"})
-                    .tiarr(new int[]{1, 2, 3})
-                    .tlarr(new long[]{7, 8, 9})
-                    .tfarr(new float[]{0.1f, 0.001f, 0.036f})
-                    .tdarr(new double[]{1.6, 9.6, 0.39})
-                    .tsl(new ModelS())
-                    .tpl(new ModelP())
-                    .tplarr(new Parcelable[]{new ModelP(), new ModelP(), new ModelP()})
-                    .goForResult(9);
+            TestGoActivityGO goActivityGO = Go.TestGoActivity()
+                                              .from(MainActivity.this)
+                                              .tb((byte) 1)
+                                              .tb1((byte) 2)
+                                              .tc('q')
+                                              .tc1('b')
+                                              .ts((short) 3)
+                                              .ts1((short) 4)
+                                              .ti(5)
+                                              .ti1(6)
+                                              .tl(7)
+                                              .tl1(8l)
+                                              .tf(0.1f)
+                                              .tf1(0.2f)
+                                              .td(0.3)
+                                              .td1(0.4)
+                                              .tstr("haha")
+                                              .tbn(true)
+                                              .tbn1(false)
+                                              .tsarr(new String[]{
+                                                      "hello,", "a", "n", "d", "r", "o", "i", "d"
+                                              })
+                                              .tiarr(new int[]{1, 2, 3})
+                                              .tlarr(new long[]{7, 8, 9})
+                                              .tfarr(new float[]{0.1f, 0.001f, 0.036f})
+                                              .tdarr(new double[]{1.6, 9.6, 0.39})
+                                              .tsl(new ModelS())
+                                              .tpl(new ModelP())
+                                              .tplarr(new Parcelable[]{
+                                                      new ModelP(), new ModelP(), new ModelP()
+                                              });
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                v.setTransitionName("test");
+                goActivityGO.go(ActivityOptions.makeSceneTransitionAnimation(MainActivity.this,
+                                                                             v,
+                                                                             "test").toBundle());
+            } else {
+                goActivityGO.go(9);
+            }
         }
     };
 

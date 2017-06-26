@@ -3,8 +3,13 @@ package test.qbw.annotation.go;
 import android.app.Activity;
 import android.databinding.DataBindingUtil;
 import android.databinding.ObservableField;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.transition.Fade;
+import android.transition.Slide;
+import android.view.View;
+import android.view.Window;
 
 import com.qbw.annotation.Go;
 import com.qbw.annotation.go.BundleValue;
@@ -94,11 +99,22 @@ public class TestGoActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
+            Slide slide = new Slide();
+            slide.setDuration(5000);
+            //getWindow().setSharedElementEnterTransition(slide);
+            Fade fade = new Fade();
+            fade.setDuration(5000);
+        }
         super.onCreate(savedInstanceState);
         ActivityTestBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_test);
         binding.setInfo(mInfo);
         Go.TestGoActivity().unpack(this, getIntent().getExtras());
         mInfo.set(strInfo());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            binding.txtInfo.setTransitionName("test");
+        }
     }
 
 
@@ -151,5 +167,8 @@ public class TestGoActivity extends Activity {
     public void onBackPressed() {
         setResult(100);
         super.onBackPressed();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            finishAfterTransition();
+        }
     }
 }

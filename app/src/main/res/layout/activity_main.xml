@@ -10,9 +10,10 @@
             type="MainActivity"/>
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/white"
         android:orientation="vertical">
 
         <TextView
@@ -24,9 +25,11 @@
             android:textColor="@android:color/white"/>
 
         <Button
+            android:id="@+id/btn"
             android:layout_width="match_parent"
             android:layout_height="48dp"
+            android:layout_centerInParent="true"
             android:onClick="@{act.test1GoClick}"
             android:text="go test1"/>
-    </LinearLayout>
+    </RelativeLayout>
 </layout>
